@@ -6,16 +6,16 @@ const BOARD_DIMENSIONS: usize = 5;
 
 #[derive(Debug, Copy, Clone)]
 struct BingoNumber {
-    number: u8,
+    number: usize,
     marked: bool,
 }
 
 impl BingoNumber {
-    fn new(number: u8) -> Self {
+    fn new(number: usize) -> Self {
         BingoNumber{ number: number, marked: false }
     }
 
-    fn mark_if_hit(&self, by: u8) -> Self {
+    fn mark_if_hit(&self, by: usize) -> Self {
         if self.number == by {
             BingoNumber{ number: self.number, marked: true }
         } else {
@@ -43,18 +43,18 @@ impl Default for BingoNumber {
 
 #[derive(Debug, Clone)]
 struct Board {
-    id: u8,
+    id: usize,
     numbers: Vec<Vec<BingoNumber>>,
 }
 
 impl Board {
-    fn new(input: Vec<&str>, id: u8) -> Self {
+    fn new(input: Vec<&str>, id: usize) -> Self {
         let mut numbers: Vec<Vec<BingoNumber>> = Vec::new();
         
         for line in input {
             let mut line_numbers: Vec<BingoNumber> = Vec::new();
             for num in line.split_whitespace() {
-                let num_u8 : u8 = match num.parse::<u8>() {
+                let num_u8 : usize = match num.parse::<usize>() {
                     Ok(n) => n,
                     Err(_) => { panic!("Could not parse {:?} as u8", num) }
                 };
@@ -67,7 +67,7 @@ impl Board {
         Board { numbers: numbers, id: id }
     }
 
-    fn mark(&self, number: u8) -> Self {
+    fn mark(&self, number: usize) -> Self {
         let mut new_numbers: Vec<Vec<BingoNumber>> = Vec::new();
         for line in &self.numbers {
             let new_line: Vec<BingoNumber> = line.iter().map(|&n| n.mark_if_hit(number)).collect();
@@ -116,32 +116,38 @@ impl fmt::Display for Board {
 
 #[derive(Debug)]
 struct BingoGame {
-   numbers: Vec<u8>,
+   numbers: Vec<usize>,
    boards: Vec<Board>,
 }
 
 impl BingoGame {
-    fn new(numbers: Vec<u8>, boards: Vec<Board>) -> Self {
+    fn new(numbers: Vec<usize>, boards: Vec<Board>) -> Self {
         let mut stacked_numbers = numbers;
         stacked_numbers.reverse();
         BingoGame { numbers: stacked_numbers, boards: boards }
     }
 
-    fn run(&mut self) -> Result<(), ()> {
-        info!("Starting the game!");
-        let mut winner: Board;
-
+    fn find_winning_board(&mut self) -> Result<Board, ()> {
         while self.numbers.len() > 0 {
             self.step();
-            let won_boards: Vec<u8> = self.boards.iter().filter(|b| b.has_won()).map(|b| b.id).collect();
-            if won_boards.len() > 0 {
-                info!("We have {} winner(s)!\n{:?}", won_boards.len(), won_boards);
-                break;
+            let winner: Option<&Board> = self.boards.iter().find(|b| b.has_won()); //filter(|b| b.has_won()).collect::<Vec<Board>>();
+            if winner.is_some() {
+                return Ok(winner.unwrap().clone());
             }
-            // break;
         }
 
-        // info!("we have a winner! it is Board {}", winner.id);
+        Err(())
+    }
+
+    fn run(&mut self) -> Result<(), ()> {
+        info!("Starting the game!");
+        
+        let winner = match self.find_winning_board() {
+            Ok(board) => board,
+            Err(_) => return Err(())
+        };
+
+        info!("we have a winner! it is Board {}:\n{}", winner.id, winner);
         Ok(())
     }
 
@@ -157,8 +163,8 @@ impl BingoGame {
     }
 }
 
-fn get_numbers(list: &str) -> Vec<u8> {
-    list.split(",").map(str::parse::<u8>).map(std::result::Result::unwrap).collect()
+fn get_numbers(list: &str) -> Vec<usize> {
+    list.split(",").map(str::parse::<usize>).map(std::result::Result::unwrap).collect()
 }
 
 fn get_boards(lines: Lines) -> Vec<Board> {
@@ -167,7 +173,7 @@ fn get_boards(lines: Lines) -> Vec<Board> {
     let mut board_lines: Vec<&str> = lines.collect::<Vec<&str>>();
     board_lines.retain(|&l| l.len() > 0);
 
-    let mut board_id = 1u8;
+    let mut board_id = 1;
     for raw_board in board_lines.chunks(5) {
         let mut board_list: Vec<&str> = Vec::new();
         for line in raw_board {
