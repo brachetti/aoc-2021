@@ -26,6 +26,13 @@ impl BingoNumber {
     fn is_marked(&self) -> bool {
         self.marked
     }
+
+    fn score(&self) -> usize {
+        match self.is_marked() {
+            false => self.number,
+            _ => 0,
+        }
+    } 
 }
 
 impl fmt::Display for BingoNumber {
@@ -95,6 +102,12 @@ impl Board {
         || self.any_column_fully_marked()
         || false
     }
+
+    fn get_score(&self) -> usize {
+        self.numbers.iter().fold(0, |sum, list| {
+            sum + list.iter().fold(0, |s, num| s + num.score())
+        })
+    }
 }
 
 impl fmt::Display for Board {
@@ -118,21 +131,44 @@ impl fmt::Display for Board {
 struct BingoGame {
    numbers: Vec<usize>,
    boards: Vec<Board>,
+   last_number: usize,
+   strategy: Strategy,
+}
+
+#[derive(Copy, Clone, Debug, PartialEq)]
+pub enum Strategy {
+    First,
+    Last,
 }
 
 impl BingoGame {
-    fn new(numbers: Vec<usize>, boards: Vec<Board>) -> Self {
+    fn new(numbers: Vec<usize>, boards: Vec<Board>, strategy: Strategy) -> Self {
         let mut stacked_numbers = numbers;
         stacked_numbers.reverse();
-        BingoGame { numbers: stacked_numbers, boards: boards }
+        BingoGame { numbers: stacked_numbers, boards: boards, last_number: 0, strategy: strategy }
     }
 
-    fn find_winning_board(&mut self) -> Result<Board, ()> {
+    fn find_winning_board(&mut self) -> Result<&Board, ()> {
         while self.numbers.len() > 0 {
             self.step();
-            let winner: Option<&Board> = self.boards.iter().find(|b| b.has_won()); //filter(|b| b.has_won()).collect::<Vec<Board>>();
+            let mut index = 0;
+            let mut winner: Option<&Board> = None;
+            for board in &self.boards {
+                if board.has_won() {
+                    winner = Some(&board.clone());
+                }
+                index = index + 1;
+            }
+            
             if winner.is_some() {
-                return Ok(winner.unwrap().clone());
+                let won = winner.unwrap();
+                if self.strategy == Strategy::Last {
+                    if self.boards.len() > 1 {
+                        self.boards.remove(index);
+                        continue;
+                    }
+                }
+                return Ok(won);
             }
         }
 
@@ -143,12 +179,22 @@ impl BingoGame {
         info!("Starting the game!");
         
         let winner = match self.find_winning_board() {
-            Ok(board) => board,
+            Ok(board) => board.clone(),
             Err(_) => return Err(())
         };
 
         info!("we have a winner! it is Board {}:\n{}", winner.id, winner);
+        
+        self.calculate_score(&winner);
+
         Ok(())
+    }
+
+    fn calculate_score(&self, winner: &Board) {
+        debug!("Calculating winning score for board \n{}", winner);
+        let board_score = winner.get_score();
+        let result = board_score * self.last_number;
+        info!("And the winning score = {} * {} = {}", board_score, self.last_number, result);
     }
 
     fn step(&mut self) {
@@ -160,6 +206,7 @@ impl BingoGame {
         for board in &self.boards {
             debug!("{}\n", board);
         }
+        self.last_number = number;
     }
 }
 
@@ -192,12 +239,12 @@ fn get_boards(lines: Lines) -> Vec<Board> {
     boards
 }
 
-pub fn play_bingo(input: String) -> Result<(), ()> {
+pub fn play_bingo(input: String, strategy: Strategy) -> Result<(), ()> {
     let mut lines = input.lines();
     let numbers = get_numbers(lines.next().unwrap());
     let boards = get_boards(lines);
 
-    let mut game = BingoGame::new(numbers, boards);
+    let mut game = BingoGame::new(numbers, boards, strategy);
     
     game.run()
 }
