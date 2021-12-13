@@ -1,0 +1,17 @@
+{
+    "configurations": [
+    {
+        "type": "lldb",
+        "request": "launch",
+        "name": "aoc 2021 day 5_01",
+        "cargo": {
+            "args": [
+                "build",
+                "--lib"
+            ]
+        },
+        "program": "${cargo:program}",
+        "args": []
+    }
+    ]
+}

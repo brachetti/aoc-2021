@@ -1,5 +1,3 @@
-use std::result::Result;
-
 fn get_input() -> String {
     let args: Vec<String> = std::env::args().collect();
     let input = args.get(1).expect("Missing commandline argument!");
