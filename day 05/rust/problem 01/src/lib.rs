@@ -4,7 +4,7 @@ use std::num::ParseIntError;
 use std::str::FromStr;
 use std::fmt;
 
-const DIM: usize = 1000;
+const DIM: usize = 10;
 
 #[derive(Copy, Clone, Debug)]
 struct Point2D {
@@ -74,6 +74,10 @@ impl Line {
         self.from.x == self.to.x
     }
 
+    fn is_diagonal(&self) -> bool {
+        !self.is_simple()
+    }
+
     fn get_all_points(&self) -> Vec<Point2D> {
         let mut result = Vec::new();
         if self.is_horizontal() {
@@ -90,7 +94,28 @@ impl Line {
             for y in lower_bound..=upper_bound {
                 result.push(Point2D::new(x, y));
             }
+        } else if self.is_diagonal() {
+            debug!("Diagonal! vector {}", self);
+            let lower_bound = if self.from.x <= self.to.x {
+                self.from
+            } else { self.to };
+            let upper_bound = if self.from.x <= self.to.x {
+                self.to
+            } else { self.from };
+            let y_step_up = lower_bound.y <= upper_bound.y;
+            let mut y = lower_bound.y;
+            for x in lower_bound.x..=upper_bound.x {
+                result.push(Point2D::new(x, y));
+                if y_step_up {
+                    y = y + 1;
+                } else {
+                    if y > 0 { 
+                        y = y - 1;
+                    }
+                }
+            }
         }
+
         result
     }
 }
@@ -148,10 +173,6 @@ impl Board {
     }
 
     fn apply(&mut self, line: Line) {
-        if !line.is_simple() {
-            debug!("Ignoring line {}", line);
-            return;
-        }
         debug!("Applying {}:", line);
         let get_all_points = line.get_all_points();
         for point in get_all_points {
