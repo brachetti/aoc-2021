@@ -11,7 +11,13 @@
             "program": "${workspaceRoot}/target/debug/aoc_2021_120501",
             "args": ["example.txt"],
             "cwd": "${workspaceRoot}",
-            "sourceLanguages": ["rust"]
+            "sourceLanguages": ["rust"],
+            "env": {
+                "RUST_LOG": "debug"
+            },
+            "preRunCommands": [
+
+            ],
         }
     ]
 }

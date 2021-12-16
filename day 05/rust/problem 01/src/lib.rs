@@ -1,23 +1,20 @@
 use log::{debug, info};
+use std::fmt;
 use std::fmt::Write as FmtWrite;
 use std::num::ParseIntError;
 use std::str::FromStr;
-use std::fmt;
 
-const DIM: usize = 10;
+const DIM: usize = 1000;
 
 #[derive(Copy, Clone, Debug)]
 struct Point2D {
-    x: usize,
-    y: usize,
+    x: isize,
+    y: isize,
 }
 
 impl Point2D {
-    fn new(x: usize, y: usize) -> Self {
-        Point2D {
-            x,
-            y,
-        }
+    fn new(x: isize, y: isize) -> Self {
+        Point2D { x, y }
     }
 
     // fn hits(&self) -> String {
@@ -37,8 +34,8 @@ impl FromStr for Point2D {
             .split(',')
             .collect();
 
-        let x_fromstr = coords[0].parse::<usize>()?;
-        let y_fromstr = coords[1].parse::<usize>()?;
+        let x_fromstr = coords[0].parse::<isize>()?;
+        let y_fromstr = coords[1].parse::<isize>()?;
 
         Ok(Point2D::new(x_fromstr, y_fromstr))
     }
@@ -62,8 +59,7 @@ impl Line {
     }
 
     fn is_simple(&self) -> bool {
-        self.is_vertical()
-        || self.is_horizontal()
+        self.is_vertical() || self.is_horizontal()
     }
 
     fn is_horizontal(&self) -> bool {
@@ -82,15 +78,15 @@ impl Line {
         let mut result = Vec::new();
         if self.is_horizontal() {
             let y = self.from.y;
-            let lower_bound = usize::min(self.from.x, self.to.x);
-            let upper_bound = usize::max(self.from.x, self.to.x);
+            let lower_bound = isize::min(self.from.x, self.to.x);
+            let upper_bound = isize::max(self.from.x, self.to.x);
             for x in lower_bound..=upper_bound {
                 result.push(Point2D::new(x, y));
             }
         } else if self.is_vertical() {
             let x = self.from.x;
-            let lower_bound = usize::min(self.from.y, self.to.y);
-            let upper_bound = usize::max(self.from.y, self.to.y);
+            let lower_bound = isize::min(self.from.y, self.to.y);
+            let upper_bound = isize::max(self.from.y, self.to.y);
             for y in lower_bound..=upper_bound {
                 result.push(Point2D::new(x, y));
             }
@@ -98,10 +94,14 @@ impl Line {
             debug!("Diagonal! vector {}", self);
             let lower_bound = if self.from.x <= self.to.x {
                 self.from
-            } else { self.to };
+            } else {
+                self.to
+            };
             let upper_bound = if self.from.x <= self.to.x {
                 self.to
-            } else { self.from };
+            } else {
+                self.from
+            };
             let y_step_up = lower_bound.y <= upper_bound.y;
             let mut y = lower_bound.y;
             for x in lower_bound.x..=upper_bound.x {
@@ -109,7 +109,10 @@ impl Line {
                 if y_step_up {
                     y = y + 1;
                 } else {
-                    if y > 0 { 
+                    if y == 0 {
+                        break
+                    }
+                    if y > 0 {
                         y = y - 1;
                     }
                 }
@@ -147,8 +150,8 @@ impl From<(Point2D, Point2D)> for Line {
     }
 }
 
-impl From<[usize; 4]> for Line {
-    fn from(points: [usize; 4]) -> Self {
+impl From<[isize; 4]> for Line {
+    fn from(points: [isize; 4]) -> Self {
         Line::new(
             Point2D::new(points[0], points[1]),
             Point2D::new(points[2], points[3]),
@@ -169,7 +172,7 @@ impl Board {
     }
 
     fn position(&self, row: usize, col: usize) -> usize {
-        row * DIM + col
+        DIM * row + col
     }
 
     fn apply(&mut self, line: Line) {
@@ -177,7 +180,10 @@ impl Board {
         let get_all_points = line.get_all_points();
         for point in get_all_points {
             debug!("- {}", point);
-            let pos = self.position(point.y, point.x);
+            let pos = self.position(
+                usize::try_from(point.y).unwrap(),
+                usize::try_from(point.x).unwrap(),
+            );
             self.items[pos] = self.items[pos] + 1;
         }
 
@@ -185,7 +191,7 @@ impl Board {
     }
 
     fn count_crossings(&self) -> usize {
-        self.items.iter().filter(|&n| *n>1).count()
+        self.items.iter().filter(|&n| *n > 1).count()
     }
 }
 
@@ -234,7 +240,7 @@ impl Simulation {
             if let Some(line) = self.lines.pop() {
                 self.step(line);
             } else {
-                break
+                break;
             }
         }
     }
@@ -251,7 +257,10 @@ impl Simulation {
         self.steps();
         info!("Board after applying vectors:\n{}", self.board);
 
-        info!("{} points where vectors cross", self.board.count_crossings());
+        info!(
+            "{} points where vectors cross",
+            self.board.count_crossings()
+        );
 
         info!("Simulation is done");
         Ok(())
