@@ -2,7 +2,7 @@ use std::collections::BTreeMap;
 use std::fmt;
 use std::str::FromStr;
 
-use log::{info, debug};
+use log::{debug, info};
 
 const FISH_RESTART_TIMER: u8 = 6;
 const FISH_SPAWN_TIMER: u8 = 8;
@@ -20,12 +20,9 @@ impl Simulation {
         for mut item in input.split_terminator(",") {
             item = item.trim();
             let num = u8::from_str(item).unwrap();
-            fishes.entry(num).and_modify(|f| { *f += 1 }).or_insert(1);
+            fishes.entry(num).and_modify(|f| *f += 1).or_insert(1);
         }
-        Simulation {
-            days: 0,
-            fishes,
-        }
+        Simulation { days: 0, fishes }
     }
 
     pub fn run(&mut self) -> Result<(), ()> {
@@ -43,13 +40,15 @@ impl Simulation {
     }
 
     fn print_summary(&self) {
-        info!("After {} days, there are {} fishes!", RUN_FOR_DAYS, self.amount_fishes());
+        info!(
+            "After {} days, there are {} fishes!",
+            RUN_FOR_DAYS,
+            self.amount_fishes()
+        );
     }
 
     fn amount_fishes(&self) -> usize {
-        self.fishes.iter().fold(0, |sum, entry| {
-            sum + *entry.1
-        })
+        self.fishes.iter().fold(0, |sum, entry| sum + *entry.1)
     }
 
     fn age_one_day(&mut self) {
@@ -59,25 +58,28 @@ impl Simulation {
                 new_fishes.entry(FISH_RESTART_TIMER).or_insert(*count);
                 new_fishes
                     .entry(FISH_SPAWN_TIMER)
-                    .and_modify(|f| { *f += *count })
+                    .and_modify(|f| *f += *count)
                     .or_insert(*count);
             } else {
                 new_fishes
                     .entry(*fish - 1)
-                    .and_modify(|f| { *f += *count })
+                    .and_modify(|f| *f += *count)
                     .or_insert(*count);
             }
         }
         self.fishes = new_fishes;
     }
 
-    
     fn spawns_new_fish(&self, num: u8) -> bool {
         num == 0
     }
 
     fn fmt_fishes(&self) -> String {
-        let res: Vec<String> = self.fishes.iter().map(|(fishes, count)| format!("{}*{}", count, fishes)).collect();
+        let res: Vec<String> = self
+            .fishes
+            .iter()
+            .map(|(fishes, count)| format!("{}*{}", count, fishes))
+            .collect();
         res.join(",")
     }
 }
