@@ -1,3 +1,4 @@
+use std::collections::BTreeMap;
 use std::fmt;
 use std::str::FromStr;
 
@@ -10,14 +11,20 @@ const RUN_FOR_DAYS: u16 = 256;
 #[derive(Clone, Debug)]
 pub struct Simulation {
     days: u16,
-    fishes: Vec<u8>,
+    fishes: BTreeMap<u8, usize>,
 }
 
 impl Simulation {
     pub fn new(input: String) -> Self {
+        let mut fishes = BTreeMap::new();
+        for mut item in input.split_terminator(",") {
+            item = item.trim();
+            let num = u8::from_str(item).unwrap();
+            fishes.entry(num).and_modify(|f| { *f += 1 }).or_insert(1);
+        }
         Simulation {
             days: 0,
-            fishes: input.split_terminator(",").map(str::trim).map(u8::from_str).map(|res| res.unwrap()).collect(),
+            fishes,
         }
     }
 
@@ -27,7 +34,7 @@ impl Simulation {
             self.days = day;
             debug!("{}", self);
             self.age_one_day();
-            info!("Day {}", day);
+            // info!("Day {}", day);
         }
         self.days = RUN_FOR_DAYS;
         debug!("{}", self);
@@ -36,38 +43,41 @@ impl Simulation {
     }
 
     fn print_summary(&self) {
-        info!("After {} days, there are {} fishes!", RUN_FOR_DAYS, self.fishes.len());
+        info!("After {} days, there are {} fishes!", RUN_FOR_DAYS, self.amount_fishes());
+    }
+
+    fn amount_fishes(&self) -> usize {
+        self.fishes.iter().fold(0, |sum, entry| {
+            sum + *entry.1
+        })
     }
 
     fn age_one_day(&mut self) {
-        let mut new_fishes: Vec<u8> = Vec::new();
-        self.fishes = self.fishes.iter().map(|fish| {
-            if self.spawns_new_fish(fish.clone()) {
-                new_fishes.push(self.spawn_new());
+        let mut new_fishes: BTreeMap<u8, usize> = BTreeMap::new();
+        for (fish, count) in self.fishes.iter() {
+            if self.spawns_new_fish(*fish) {
+                new_fishes.entry(FISH_RESTART_TIMER).or_insert(*count);
+                new_fishes
+                    .entry(FISH_SPAWN_TIMER)
+                    .and_modify(|f| { *f += *count })
+                    .or_insert(*count);
+            } else {
+                new_fishes
+                    .entry(*fish - 1)
+                    .and_modify(|f| { *f += *count })
+                    .or_insert(*count);
             }
-            self.age(*fish)
-        }).collect();
-        self.fishes.append(&mut new_fishes);
+        }
+        self.fishes = new_fishes;
     }
 
-    fn spawn_new(&self) -> u8 {
-        FISH_SPAWN_TIMER
-    }
-
+    
     fn spawns_new_fish(&self, num: u8) -> bool {
         num == 0
     }
 
-    fn age(&self, fish: u8) -> u8{
-        if self.spawns_new_fish(fish) {
-            FISH_RESTART_TIMER
-        } else {
-            fish - 1
-        }
-    }
-
     fn fmt_fishes(&self) -> String {
-        let res: Vec<String> = self.fishes.iter().map(u8::to_string).collect();
+        let res: Vec<String> = self.fishes.iter().map(|(fishes, count)| format!("{}*{}", count, fishes)).collect();
         res.join(",")
     }
 }
