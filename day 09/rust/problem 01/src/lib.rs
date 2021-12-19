@@ -1,7 +1,10 @@
 use std::{
     cmp::{max, min},
     result::Result,
+    fmt
 };
+
+use log::{info, debug};
 
 #[derive(Copy, Clone, Debug)]
 struct Point {
@@ -16,21 +19,23 @@ impl Point {
 
     fn is_neighbour_of(&self, other: &Point) -> bool {
         let x = max(self.x, other.x) - min(self.x, other.x);
+        let x_same = self.x == other.x;
         let y = max(self.y, other.y) - min(self.y, other.y);
+        let y_same = self.y == other.y;
 
-        (x == 0 && y == 1) || (x == 1 && y == 0)
+        (x_same && y == 1) || (x == 1 && y_same)
     }
 }
 
 #[derive(Clone, Debug)]
 struct Location {
-    value: u8,
+    value: usize,
     is_lowest: bool,
     point: Point,
 }
 
 impl Location {
-    fn new(value: u8, x: usize, y: usize) -> Self {
+    fn new(value: usize, x: usize, y: usize) -> Self {
         let point = Point::new(x, y);
         Location {
             value,
@@ -39,10 +44,10 @@ impl Location {
         }
     }
 
-    fn with_values(location: &Location, neighbour_values: Vec<u8>) -> Self {
+    fn with_values(location: &Location, neighbour_values: Vec<usize>) -> Self {
         let value = location.value;
         let point = location.point;
-        let is_lowest = Self::is_lowest(value, neighbour_values);
+        let is_lowest = Self::check_lowest(value, neighbour_values);
         Location {
             value,
             point,
@@ -50,7 +55,7 @@ impl Location {
         }
     }
 
-    fn find_neighbours(&self, list: &Vec<Location>) -> Vec<u8> {
+    fn find_neighbours(&self, list: &Vec<Location>) -> Vec<usize> {
         let mut neighbours = Vec::new();
         for location in list {
             if location.is_neighbour_of(&self.point) {
@@ -67,7 +72,7 @@ impl Location {
         self.point.is_neighbour_of(point)
     }
 
-    fn is_lowest(value: u8, neighbour_values: Vec<u8>) -> bool {
+    fn check_lowest(value: usize, neighbour_values: Vec<usize>) -> bool {
         for other in &neighbour_values {
             if value >= *other {
                 return false
@@ -75,26 +80,50 @@ impl Location {
         }
         true
     }
+
+    fn is_lowest(&self) -> bool {
+        self.is_lowest
+    }
+
+    fn risk_level(&self) -> usize {
+        self.value + 1
+    }
+}
+
+impl fmt::Display for Location {
+    fn fmt(&self, f: &mut fmt::Formatter) -> fmt::Result {
+        if self.is_lowest {
+            write!(f, "{}", self.value)
+        } else {
+            write!(f, " ")
+        }
+    }
 }
 
 #[derive(Clone, Debug)]
 pub struct Simulation {
     locations: Vec<Location>,
+    columns: usize,
 }
 
 impl Simulation {
     pub fn new(original_input: String) -> Self {
-        let mut input = Vec::new();
+        let mut locations = Vec::new();
         let mut x = 0;
         let mut y = 0;
+        let mut columns = 0;
+        debug!("\n{}", original_input);
         for line in original_input.lines() {
-            for value in line.as_bytes() {
-                input.push(Location::new(*value, x, y));
+            for val in line.chars() {
+                let value: u32 = val.to_digit(10).unwrap();
+                locations.push(Location::new(value as usize, x, y));
                 x += 1;
             }
             y += 1;
+            columns = x;
+            x = 0;
         }
-        Simulation { locations: input }
+        Simulation { locations, columns }
     }
 
     fn init_locations(&mut self) {
@@ -107,8 +136,33 @@ impl Simulation {
             .collect()
     }
 
+    fn get_risk_levels(&self) {
+        let sum: usize = self.locations.iter().filter(|l| l.is_lowest()).map(|l| l.risk_level()).sum();
+        info!("Sum of risk levels is {}", sum);
+    }
+
     pub fn run(&mut self) -> Result<(), ()> {
+        info!("Running Simulation");
         self.init_locations();
+        debug!("{}", self);
+        self.get_risk_levels();
+        info!("Done running Simulation");
         Ok(())
+    }
+}
+
+impl fmt::Display for Simulation {
+    fn fmt(&self, f: &mut fmt::Formatter) -> fmt::Result {
+        writeln!(f);
+        let mut column = 0;
+        for location in &self.locations {
+            write!(f, "{}", location);
+            column += 1;
+            if column == self.columns {
+                writeln!(f);
+                column = 0;
+            }
+        }
+        writeln!(f)
     }
 }
