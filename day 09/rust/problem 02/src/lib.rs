@@ -56,7 +56,7 @@ impl Location {
         }
     }
 
-    fn find_neighbours(&self, list: Vec<&Location>) -> Vec<usize> {
+    fn find_neighbours(&self, list: &Vec<Location>) -> Vec<usize> {
         let mut neighbours = Vec::new();
         for location in list {
             if location.is_neighbour_of(&self.point) {
@@ -69,11 +69,11 @@ impl Location {
         neighbours.iter().map(|location| location.value).collect()
     }
 
-    fn find_basin_neighbours<'a>(&self, list: Vec<&'a Location>) -> Vec<&'a Location> {
+    fn find_basin_neighbours<'a>(&self, list: &Vec<Location>) -> Vec<Location> {
         let mut neighbours = Vec::new();
         for location in list {
             if self.is_neighbour_in_basin_of(location) {
-                neighbours.push(location);
+                neighbours.push(*location);
             }
             if neighbours.len() == 4 {
                 break;
@@ -119,14 +119,14 @@ impl fmt::Display for Location {
 }
 
 #[derive(Clone, Debug)]
-pub struct Simulation<'a> {
-    locations: Vec<&'a Location>,
+pub struct Simulation {
+    locations: Vec<Location>,
     columns: usize,
 }
 
-impl Simulation<'_> {
+impl Simulation {
     pub fn new(original_input: String) -> Self {
-        let mut locations: Vec<&Location> = Vec::new();
+        let mut locations: Vec<Location> = Vec::new();
         let mut x = 0;
         let mut y = 0;
         let mut columns = 0;
@@ -150,9 +150,10 @@ impl Simulation<'_> {
             .locations
             .iter()
             .map(|l| {
-                let values = l.find_neighbours(self.locations);
-                &Location::with_values(l, values)
+                let values = l.find_neighbours(&self.locations);
+                Location::with_values(l, values)
             })
+            // .map(|l| *l)
             .collect()
     }
 
@@ -167,12 +168,12 @@ impl Simulation<'_> {
     }
 
     fn find_basins(&self) {
-        let mut basins: HashMap<Point, HashSet<&Location>> = HashMap::new();
+        let mut basins: HashMap<Point, HashSet<Location>> = HashMap::new();
         self.locations
             .iter()
             .filter(|l| l.is_lowest())
             .for_each(|l| {
-                let basin = self.add_to_basin(HashSet::new(), vec![l]);
+                let basin = self.add_to_basin(HashSet::new(), vec![*l]);
                 basins.insert(l.point, basin);
             });
     }
@@ -182,17 +183,28 @@ impl Simulation<'_> {
      */
     fn add_to_basin<'a>(
         &self,
-        mut basin: HashSet<&'a Location>,
-        to_check: Vec<&'a Location>,
-    ) -> HashSet<&'a Location> {
-        let mut additional: Vec<&Location> = Vec::new();
+        mut basin: HashSet<Location>,
+        to_check: Vec<Location>,
+    ) -> HashSet<Location> {
+        // can be at most that many
+        let max = to_check.len() * 4;
+        let mut additional: Vec<Location> = Vec::with_capacity(max);
+        // end-recursive return
         if to_check.is_empty() {
             return basin;
         }
+        basin.reserve(to_check.len());
         for location in to_check {
-            basin.insert(location);
-            let l_neighbours = location.find_basin_neighbours(self.locations);
+            // succesively push the locations into the known space
+            if !basin.insert(location) {
+                // location was already known, do not double check
+                continue;
+            }
+            // for that location, find the potential neighbours
+            let mut l_neighbours = location.find_basin_neighbours(&self.locations);
+            additional.append(&mut l_neighbours);
         }
+
         self.add_to_basin(basin, additional)
     }
 
@@ -207,7 +219,7 @@ impl Simulation<'_> {
     }
 }
 
-impl fmt::Display for Simulation<'_> {
+impl fmt::Display for Simulation {
     fn fmt(&self, f: &mut fmt::Formatter) -> fmt::Result {
         let mut o = String::from("\n");
         let mut column = 0;
