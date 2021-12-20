@@ -42,7 +42,7 @@
                 "example.txt"
             ],
             "env": {
-                "RUST_LOG": "info",
+                "RUST_LOG": "debug",
             },
             "cwd": "${workspaceFolder}"
         },
