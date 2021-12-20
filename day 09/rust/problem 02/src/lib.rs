@@ -56,7 +56,7 @@ impl Location {
         }
     }
 
-    fn find_neighbours(&self, list: &Vec<Location>) -> Vec<usize> {
+    fn find_neighbours(&self, list: &[Location]) -> Vec<usize> {
         let mut neighbours = Vec::new();
         for location in list {
             if location.is_neighbour_of(&self.point) {
@@ -69,7 +69,7 @@ impl Location {
         neighbours.iter().map(|location| location.value).collect()
     }
 
-    fn find_basin_neighbours(&self, list: &Vec<Location>) -> Vec<Location> {
+    fn find_basin_neighbours(&self, list: &[Location]) -> Vec<Location> {
         let mut neighbours = Vec::new();
         for location in list {
             if self.is_neighbour_in_basin_of(location) {
@@ -129,18 +129,16 @@ impl Simulation {
     pub fn new(original_input: String) -> Self {
         let mut locations: Vec<Location> = Vec::new();
         let mut x = 0;
-        let mut y = 0;
         let mut columns = 0;
         let basins = HashMap::new();
         debug!("\n{}", original_input);
-        for line in original_input.lines() {
+        for (y, line) in original_input.lines().enumerate() {
             for val in line.chars() {
                 let value: u32 = val.to_digit(10).unwrap();
                 let location = Location::new(value as usize, x, y);
                 locations.push(location);
                 x += 1;
             }
-            y += 1;
             columns = x;
             x = 0;
         }
@@ -219,12 +217,7 @@ impl Simulation {
     fn get_basin_sizes(&self) {
         let mut basin_sizes: Vec<usize> = self.basins.iter().map(|(_, set)| set.len()).collect();
         basin_sizes.sort_unstable();
-        let product = basin_sizes
-            .iter()
-            .rev()
-            .take(3)
-            .map(|e| *e)
-            .fold(1, |acc, elem| acc * elem);
+        let product: usize = basin_sizes.iter().rev().take(3).copied().product();
         info!("Product of 3 largest basin sizes levels is {}", product);
     }
 
@@ -248,7 +241,7 @@ impl fmt::Display for Simulation {
             o.push_str(&location.to_string());
             column += 1;
             if column == self.columns {
-                o.push_str("\n");
+                o.push('\n');
                 column = 0;
             }
         }
