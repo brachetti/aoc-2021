@@ -69,7 +69,7 @@ impl Location {
         neighbours.iter().map(|location| location.value).collect()
     }
 
-    fn find_basin_neighbours<'a>(&self, list: &Vec<Location>) -> Vec<Location> {
+    fn find_basin_neighbours(&self, list: &Vec<Location>) -> Vec<Location> {
         let mut neighbours = Vec::new();
         for location in list {
             if self.is_neighbour_in_basin_of(location) {
@@ -121,6 +121,7 @@ impl fmt::Display for Location {
 #[derive(Clone, Debug)]
 pub struct Simulation {
     locations: Vec<Location>,
+    basins: HashMap<Point, HashSet<Location>>,
     columns: usize,
 }
 
@@ -130,6 +131,7 @@ impl Simulation {
         let mut x = 0;
         let mut y = 0;
         let mut columns = 0;
+        let basins = HashMap::new();
         debug!("\n{}", original_input);
         for line in original_input.lines() {
             for val in line.chars() {
@@ -142,7 +144,11 @@ impl Simulation {
             columns = x;
             x = 0;
         }
-        Simulation { locations, columns }
+        Simulation {
+            locations,
+            columns,
+            basins,
+        }
     }
 
     fn init_locations(&mut self) {
@@ -167,7 +173,7 @@ impl Simulation {
         info!("Sum of risk levels is {}", sum);
     }
 
-    fn find_basins(&self) {
+    fn find_basins(&mut self) {
         let mut basins: HashMap<Point, HashSet<Location>> = HashMap::new();
         self.locations
             .iter()
@@ -176,12 +182,14 @@ impl Simulation {
                 let basin = self.add_to_basin(HashSet::new(), vec![*l]);
                 basins.insert(l.point, basin);
             });
+
+        self.basins = basins
     }
 
     /**
      * Iteratively checks all locations for neighbours, that would be part of the basin.
      */
-    fn add_to_basin<'a>(
+    fn add_to_basin(
         &self,
         mut basin: HashSet<Location>,
         to_check: Vec<Location>,
@@ -208,12 +216,25 @@ impl Simulation {
         self.add_to_basin(basin, additional)
     }
 
+    fn get_basin_sizes(&self) {
+        let mut basin_sizes: Vec<usize> = self.basins.iter().map(|(_, set)| set.len()).collect();
+        basin_sizes.sort_unstable();
+        let product = basin_sizes
+            .iter()
+            .rev()
+            .take(3)
+            .map(|e| *e)
+            .fold(1, |acc, elem| acc * elem);
+        info!("Product of 3 largest basin sizes levels is {}", product);
+    }
+
     pub fn run(&mut self) -> Result<(), ()> {
         info!("Running Simulation");
         self.init_locations();
         debug!("{}", self);
         self.get_risk_levels();
         self.find_basins();
+        self.get_basin_sizes();
         info!("Done running Simulation");
         Ok(())
     }
