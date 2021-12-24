@@ -1,36 +1,33 @@
-use std::result::Result;
+mod algorithm;
+mod image;
 
-use arrayvec::{ArrayString, ArrayVec};
+use algorithm::IEAlgorithm;
+use image::Image;
+use std::{fmt, result::Result};
 
-extern crate arrayvec;
-
-#[derive(Copy, Clone, Debug)]
-struct IEAlgorithm {
-    description: ArrayString<512>,
-}
-
-impl IEAlgorithm {
-    fn new(input: String) -> Self {
-        let description = ArrayString::from(&input).unwrap();
-        Self { description }
-    }
-}
-
-#[derive(Copy, Clone, Debug)]
+#[derive(Debug)]
 pub struct Simulation {
     algorithm: IEAlgorithm,
+    image: Image,
 }
 
 impl Simulation {
     pub fn new(input: String) -> Self {
-        let lines = input.lines();
-        let algo_input = lines.take(1).collect();
+        let algo_input = input.lines().take(1).collect();
         let algorithm = IEAlgorithm::new(algo_input);
+        let image_input = input.lines().skip(1).collect();
+        let image = Image::with_starting_image(image_input);
 
-        Self { algorithm }
+        Self { algorithm, image }
     }
 
     pub fn run(&mut self) -> Result<(), ()> {
         Ok(())
+    }
+}
+
+impl fmt::Display for Simulation {
+    fn fmt(&self, f: &mut fmt::Formatter) -> fmt::Result {
+        writeln!(f, "{}", self.image)
     }
 }

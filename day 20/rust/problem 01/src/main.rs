@@ -1,5 +1,7 @@
 #[macro_use]
 extern crate log;
+extern crate num_traits;
+extern crate quadtree_rs;
 
 use aoc_2021_122001::Simulation;
 
