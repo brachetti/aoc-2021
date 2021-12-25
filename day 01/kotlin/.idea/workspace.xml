@@ -4,9 +4,8 @@
     <option name="autoReloadType" value="ALL" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="d87c35d2-9b33-454d-871b-f0e1f6725054" name="Changes" comment="solve problem 01 in kotlin">
+    <list default="true" id="d87c35d2-9b33-454d-871b-f0e1f6725054" name="Changes" comment="small improvements in arg parser">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/kotlin/rb/com/aoc21/day01/app/App.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/kotlin/rb/com/aoc21/day01/app/App.kt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/src/main/kotlin/rb/com/aoc21/day01/app/Day01.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/kotlin/rb/com/aoc21/day01/app/Day01.kt" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -130,7 +129,7 @@
       <command value="gradle clean" />
     </option>
   </component>
-  <component name="RunManager" selected="Kotlin.full run">
+  <component name="RunManager" selected="Kotlin.full run 2">
     <configuration name="kotlin [clean]" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
       <ExternalSystemSettings>
         <option name="executionName" />
@@ -173,7 +172,7 @@
       <DebugAllEnabled>false</DebugAllEnabled>
       <method v="2" />
     </configuration>
-    <configuration name="example run" type="JetRunConfigurationType" temporary="true" show_console_on_std_err="true" show_console_on_std_out="true">
+    <configuration name="example run 1" type="JetRunConfigurationType" temporary="true" show_console_on_std_err="true" show_console_on_std_out="true">
       <option name="MAIN_CLASS_NAME" value="rb.com.aoc21.day01.app.AppKt" />
       <module name="AoC21Day01.app.main" />
       <option name="PROGRAM_PARAMETERS" value="-m example" />
@@ -182,7 +181,16 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="full run" type="JetRunConfigurationType">
+    <configuration name="example run 2" type="JetRunConfigurationType" show_console_on_std_err="true" show_console_on_std_out="true">
+      <option name="MAIN_CLASS_NAME" value="rb.com.aoc21.day01.app.AppKt" />
+      <module name="AoC21Day01.app.main" />
+      <option name="PROGRAM_PARAMETERS" value="-m example -p 2 --verbose" />
+      <shortenClasspath name="NONE" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="full run 1" type="JetRunConfigurationType">
       <option name="MAIN_CLASS_NAME" value="rb.com.aoc21.day01.app.AppKt" />
       <module name="AoC21Day01.app.main" />
       <option name="PROGRAM_PARAMETERS" value="-m input" />
@@ -191,15 +199,26 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
+    <configuration name="full run 2" type="JetRunConfigurationType">
+      <option name="MAIN_CLASS_NAME" value="rb.com.aoc21.day01.app.AppKt" />
+      <module name="AoC21Day01.app.main" />
+      <option name="PROGRAM_PARAMETERS" value="-m input -p 2" />
+      <shortenClasspath name="NONE" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
     <list>
       <item itemvalue="Gradle.kotlin [clean]" />
       <item itemvalue="Gradle.kotlin:app [run]" />
-      <item itemvalue="Kotlin.full run" />
-      <item itemvalue="Kotlin.example run" />
+      <item itemvalue="Kotlin.full run 1" />
+      <item itemvalue="Kotlin.full run 2" />
+      <item itemvalue="Kotlin.example run 2" />
+      <item itemvalue="Kotlin.example run 1" />
     </list>
     <recent_temporary>
       <list>
-        <item itemvalue="Kotlin.example run" />
+        <item itemvalue="Kotlin.example run 1" />
         <item itemvalue="Gradle.kotlin:app [run]" />
         <item itemvalue="Gradle.kotlin [clean]" />
       </list>
@@ -221,7 +240,14 @@
       <option name="project" value="LOCAL" />
       <updated>1640456320639</updated>
     </task>
-    <option name="localTasksCounter" value="2" />
+    <task id="LOCAL-00002" summary="small improvements in arg parser">
+      <created>1640457358538</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1640457358538</updated>
+    </task>
+    <option name="localTasksCounter" value="3" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -238,17 +264,7 @@
   <component name="VcsManagerConfiguration">
     <MESSAGE value="init day 01 with kotlin" />
     <MESSAGE value="solve problem 01 in kotlin" />
-    <option name="LAST_COMMIT_MESSAGE" value="solve problem 01 in kotlin" />
-  </component>
-  <component name="XDebuggerManager">
-    <breakpoint-manager>
-      <breakpoints>
-        <line-breakpoint enabled="true" type="kotlin-line">
-          <url>file://$PROJECT_DIR$/app/src/main/kotlin/rb/com/aoc21/day01/app/Day01.kt</url>
-          <line>28</line>
-          <option name="timeStamp" value="4" />
-        </line-breakpoint>
-      </breakpoints>
-    </breakpoint-manager>
+    <MESSAGE value="small improvements in arg parser" />
+    <option name="LAST_COMMIT_MESSAGE" value="small improvements in arg parser" />
   </component>
 </project>
