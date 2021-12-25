@@ -31,20 +31,20 @@ fun main(args: Array<String>) {
 
     val mode by parser
         .option(
-            ArgType.String,
+            ArgType.Choice(listOf("example", "input"), { it }),
             shortName = "m",
             fullName = "mode",
             description = "Chose mode (example or input)",
         )
         .required()
 
-    val problem by parser
+    val problemArg by parser
         .option(
-            ArgType.Int,
+            ArgType.Choice(listOf("1", "2"), { it }),
             shortName = "p",
             fullName = "problem",
             description = "Which problem to solve?",
-        ).default(1)
+        ).default("1")
 
     val verbose by parser
         .option(
@@ -55,6 +55,8 @@ fun main(args: Array<String>) {
         .default(false)
 
     parser.parse(args)
+
+    var problem = problemArg.toInt()
 
     if (verbose) {
         LogManager.getRootLogger().level = Level.DEBUG

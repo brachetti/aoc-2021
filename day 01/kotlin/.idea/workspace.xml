@@ -4,41 +4,10 @@
     <option name="autoReloadType" value="ALL" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="d87c35d2-9b33-454d-871b-f0e1f6725054" name="Changes" comment="init day 01 with kotlin">
-      <change afterPath="$PROJECT_DIR$/.gitattributes" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/.name" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/compiler.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/gradle.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/jarRepositories.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/build.gradle.kts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/src/main/kotlin/rb/com/aoc21/day01/app/App.kt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/src/main/kotlin/rb/com/aoc21/day01/app/Day01.kt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/src/main/kotlin/rb/com/aoc21/day01/app/MessageUtils.kt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/src/main/resources/log4j.properties" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/src/test/kotlin/rb/com/aoc21/day01/app/MessageUtilsTest.kt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/build.gradle.kts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/buildSrc/build.gradle.kts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/buildSrc/src/main/kotlin/rb.com.aoc21.day01.kotlin-application-conventions.gradle.kts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/buildSrc/src/main/kotlin/rb.com.aoc21.day01.kotlin-common-conventions.gradle.kts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/buildSrc/src/main/kotlin/rb.com.aoc21.day01.kotlin-library-conventions.gradle.kts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/gradle/wrapper/gradle-wrapper.jar" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/gradle/wrapper/gradle-wrapper.properties" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/gradlew" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/gradlew.bat" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/list/build.gradle.kts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/list/src/main/kotlin/rb/com/aoc21/day01/list/LinkedList.kt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/list/src/test/kotlin/rb/com/aoc21/day01/list/LinkedListTest.kt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/settings.gradle.kts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/example.txt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/input.txt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/utilities/build.gradle.kts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/utilities/src/main/kotlin/rb/com/aoc21/day01/utilities/Fileutils.kt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/utilities/src/main/kotlin/rb/com/aoc21/day01/utilities/JoinUtils.kt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/utilities/src/main/kotlin/rb/com/aoc21/day01/utilities/SplitUtils.kt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/utilities/src/main/kotlin/rb/com/aoc21/day01/utilities/StringUtils.kt" afterDir="false" />
+    <list default="true" id="d87c35d2-9b33-454d-871b-f0e1f6725054" name="Changes" comment="solve problem 01 in kotlin">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/kotlin/rb/com/aoc21/day01/app/App.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/kotlin/rb/com/aoc21/day01/app/App.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/kotlin/rb/com/aoc21/day01/app/Day01.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/kotlin/rb/com/aoc21/day01/app/Day01.kt" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -245,6 +214,14 @@
       <option name="presentableId" value="Default" />
       <updated>1640422057145</updated>
     </task>
+    <task id="LOCAL-00001" summary="solve problem 01 in kotlin">
+      <created>1640456320639</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1640456320639</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -260,14 +237,15 @@
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="init day 01 with kotlin" />
-    <option name="LAST_COMMIT_MESSAGE" value="init day 01 with kotlin" />
+    <MESSAGE value="solve problem 01 in kotlin" />
+    <option name="LAST_COMMIT_MESSAGE" value="solve problem 01 in kotlin" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
       <breakpoints>
         <line-breakpoint enabled="true" type="kotlin-line">
           <url>file://$PROJECT_DIR$/app/src/main/kotlin/rb/com/aoc21/day01/app/Day01.kt</url>
-          <line>27</line>
+          <line>28</line>
           <option name="timeStamp" value="4" />
         </line-breakpoint>
       </breakpoints>

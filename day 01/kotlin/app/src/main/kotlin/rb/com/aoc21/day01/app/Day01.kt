@@ -3,6 +3,7 @@ package rb.com.aoc21.day01.app
 import mu.KotlinLogging
 
 class Day01(private val inputs: List<Int>) {
+
     companion object {
         private val logger = KotlinLogging.logger {}
     }
