@@ -2,7 +2,6 @@ package rb.com.aoc21.day05.app
 
 import mu.KotlinLogging
 import java.lang.Integer.min
-import java.util.*
 import kotlin.math.max
 import kotlin.math.sqrt
 
@@ -32,18 +31,6 @@ class Point(internal val x: Int, internal val y: Int) : Comparable<Point> {
         return "$x,$y"
     }
 
-    override fun equals(other: Any?): Boolean {
-        if (other is Point) {
-            return x == other.x && y == other.y
-        }
-        return false
-    }
-
-    override fun hashCode(): Int {
-        var result = x
-        result = 31 * result + y
-        return result
-    }
 
     private fun len(): Double {
         return sqrt(((x * x) + (y * y)).toDouble())
@@ -51,6 +38,26 @@ class Point(internal val x: Int, internal val y: Int) : Comparable<Point> {
 
     override fun compareTo(other: Point): Int {
         return len().compareTo(other.len())
+    }
+
+    override fun hashCode(): Int {
+        return toPair().hashCode()
+    }
+
+    private fun toPair(): Pair<Int, Int> {
+        return x to y
+    }
+
+    override fun equals(other: Any?): Boolean {
+        if (this === other) return true
+        if (javaClass != other?.javaClass) return false
+
+        other as Point
+
+        if (x != other.x) return false
+        if (y != other.y) return false
+
+        return true
     }
 
 
@@ -122,6 +129,24 @@ class Line(private val from: Point, private val to: Point) {
     fun isVertical(): Boolean {
         return from.x == to.x
     }
+
+    override fun equals(other: Any?): Boolean {
+        if (this === other) return true
+        if (javaClass != other?.javaClass) return false
+
+        other as Line
+
+        if (from != other.from) return false
+        if (to != other.to) return false
+
+        return true
+    }
+
+    override fun hashCode(): Int {
+        var result = from.hashCode()
+        result = 31 * result + to.hashCode()
+        return result
+    }
 }
 
 class Grid {
@@ -129,7 +154,7 @@ class Grid {
         val logger = KotlinLogging.logger {}
     }
 
-    var contents: SortedMap<Point, Int> = TreeMap()
+    var contents: MutableMap<Point, Int> = HashMap()
 
     fun countOverlapPoints(): Int {
         val filterValues = contents.filterValues { it > 1 }
@@ -141,9 +166,9 @@ class Grid {
         logger.debug { "Marking Point $point" }
         if (contents.containsKey(point)) {
             val counter = contents.getValue(point)
-            contents.set(point, counter + 1)
+            contents[point] = counter + 1
         } else {
-            contents.put(point, 1)
+            contents[point] = 1
         }
 
     }
@@ -173,8 +198,8 @@ class Grid {
     override fun toString(): String {
         val sb = StringBuilder("\n")
         val (maxX, maxY) = getDimensions()
-        (0..maxX).forEach { x ->
-            (0..maxY).forEach { y ->
+        (0..maxY).forEach { y ->
+            (0..maxX).forEach { x ->
                 sb.append(pointToString(x to y))
             }
             sb.append("\n")
