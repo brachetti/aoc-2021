@@ -3,10 +3,70 @@
   <component name="AutoImportSettings">
     <option name="autoReloadType" value="ALL" />
   </component>
+  <component name="AutomaticModuleUnloader">
+    <loaded-modules>
+      <module name="AoC21Day01" />
+      <module name="AoC21Day01.app" />
+      <module name="AoC21Day01.list" />
+      <module name="AoC21Day01.utilities" />
+      <module name="AoC21Day01.app.test" />
+      <module name="AoC21Day01.app.main" />
+      <module name="AoC21Day01.list.test" />
+      <module name="AoC21Day01.list.main" />
+      <module name="AoC21Day01.utilities.test" />
+      <module name="AoC21Day01.utilities.main" />
+    </loaded-modules>
+  </component>
   <component name="ChangeListManager">
-    <list default="true" id="d87c35d2-9b33-454d-871b-f0e1f6725054" name="Changes" comment="small improvements in arg parser">
+    <list default="true" id="d87c35d2-9b33-454d-871b-f0e1f6725054" name="Changes" comment="solving problem 2 for day 1 in kotlin :)">
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/gradle_wrapper.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../day 05/kotlin/.gitattributes" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../day 05/kotlin/.gitignore" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../day 05/kotlin/.idea/.gitignore" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../day 05/kotlin/.idea/.name" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../day 05/kotlin/.idea/codeStyles/codeStyleConfig.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../day 05/kotlin/.idea/compiler.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../day 05/kotlin/.idea/gradle.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../day 05/kotlin/.idea/inspectionProfiles/Project_Default.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../day 05/kotlin/.idea/jarRepositories.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../day 05/kotlin/.idea/misc.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../day 05/kotlin/.idea/vcs.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../day 05/kotlin/app/build.gradle.kts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../day 05/kotlin/app/src/main/AOC21Day05.main1.iml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../day 05/kotlin/app/src/main/kotlin/rb/com/aoc21/day05/app/App.kt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../day 05/kotlin/app/src/main/kotlin/rb/com/aoc21/day05/app/Grid.kt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../day 05/kotlin/app/src/main/kotlin/rb/com/aoc21/day05/app/HydrothermalGrid.kt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../day 05/kotlin/app/src/main/kotlin/rb/com/aoc21/day05/app/MessageUtils.kt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../day 05/kotlin/app/src/main/resources/log4j.properties" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../day 05/kotlin/app/src/test/AOC21Day05.test1.iml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../day 05/kotlin/app/src/test/kotlin/rb/com/aoc21/day05/app/GridTest.kt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../day 05/kotlin/app/src/test/kotlin/rb/com/aoc21/day05/app/LineTest.kt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../day 05/kotlin/app/src/test/kotlin/rb/com/aoc21/day05/app/MessageUtilsTest.kt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../day 05/kotlin/app/src/test/resources/log4j.properties" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../day 05/kotlin/build.gradle.kts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../day 05/kotlin/buildSrc/build.gradle.kts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../day 05/kotlin/buildSrc/src/main/kotlin/rb.com.aoc21.day05.kotlin-application-conventions.gradle.kts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../day 05/kotlin/buildSrc/src/main/kotlin/rb.com.aoc21.day05.kotlin-common-conventions.gradle.kts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../day 05/kotlin/buildSrc/src/main/kotlin/rb.com.aoc21.day05.kotlin-library-conventions.gradle.kts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../day 05/kotlin/gradle/wrapper/gradle-wrapper.jar" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../day 05/kotlin/gradle/wrapper/gradle-wrapper.properties" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../day 05/kotlin/gradlew" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../day 05/kotlin/gradlew.bat" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../day 05/kotlin/list/build.gradle.kts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../day 05/kotlin/list/src/main/AOC21Day05.main.iml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../day 05/kotlin/list/src/main/kotlin/rb/com/aoc21/day05/list/LinkedList.kt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../day 05/kotlin/list/src/test/AOC21Day05.test.iml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../day 05/kotlin/list/src/test/kotlin/rb/com/aoc21/day05/list/LinkedListTest.kt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../day 05/kotlin/settings.gradle.kts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../day 05/kotlin/src/example.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../day 05/kotlin/src/input.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../day 05/kotlin/utilities/AOC21Day05.utilities.iml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../day 05/kotlin/utilities/build.gradle.kts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../day 05/kotlin/utilities/src/main/kotlin/rb/com/aoc21/day05/utilities/Fileutils.kt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../day 05/kotlin/utilities/src/main/kotlin/rb/com/aoc21/day05/utilities/JoinUtils.kt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../day 05/kotlin/utilities/src/main/kotlin/rb/com/aoc21/day05/utilities/SplitUtils.kt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../day 05/kotlin/utilities/src/main/kotlin/rb/com/aoc21/day05/utilities/StringUtils.kt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/kotlin/rb/com/aoc21/day01/app/Day01.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/kotlin/rb/com/aoc21/day01/app/Day01.kt" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -94,6 +154,16 @@
       <filtered-out-file-type name="COMMIT_BY_MESSAGE" />
     </file-type-list>
   </component>
+  <component name="HighlightingSettingsPerFile">
+    <setting file="file://$PROJECT_DIR$/app/src/main/kotlin/rb/com/aoc21/day01/app/Day01.kt" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/build.gradle.kts" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/utilities/src/main/kotlin/rb/com/aoc21/day01/utilities/StringUtils.kt" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/app/src/main/kotlin/rb/com/aoc21/day01/app/MessageUtils.kt" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/utilities/src/main/kotlin/rb/com/aoc21/day01/utilities/Fileutils.kt" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/app/build.gradle.kts" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/app/src/main/kotlin/rb/com/aoc21/day01/app/App.kt" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/utilities/src/main/kotlin/rb/com/aoc21/day01/utilities/SplitUtils.kt" root0="FORCE_HIGHLIGHTING" />
+  </component>
   <component name="KotlinCodeInsightWorkspaceSettings">
     <option name="optimizeImportsOnTheFly" value="true" />
   </component>
@@ -110,9 +180,10 @@
   <component name="PropertiesComponent">
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
+    <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="com.intellij.openapi.externalSystem.service.settings.ExternalSystemGroupConfigurable" value="ALL" />
-    <property name="project.structure.last.edited" value="Facets" />
-    <property name="project.structure.proportion" value="0.0" />
+    <property name="project.structure.last.edited" value="Modules" />
+    <property name="project.structure.proportion" value="0.15" />
     <property name="project.structure.side.proportion" value="0.2" />
     <property name="settings.editor.selected.configurable" value="build.tools" />
   </component>
@@ -172,6 +243,12 @@
       <DebugAllEnabled>false</DebugAllEnabled>
       <method v="2" />
     </configuration>
+    <configuration default="true" type="JetRunConfigurationType">
+      <module name="AoC21Day01" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
     <configuration name="example run 1" type="JetRunConfigurationType" temporary="true" show_console_on_std_err="true" show_console_on_std_out="true">
       <option name="MAIN_CLASS_NAME" value="rb.com.aoc21.day01.app.AppKt" />
       <module name="AoC21Day01.app.main" />
@@ -204,6 +281,13 @@
       <module name="AoC21Day01.app.main" />
       <option name="PROGRAM_PARAMETERS" value="-m input -p 2" />
       <shortenClasspath name="NONE" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration default="true" type="KotlinStandaloneScriptRunConfigurationType">
+      <module name="AoC21Day01" />
+      <option name="filePath" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
@@ -249,6 +333,11 @@
     </task>
     <option name="localTasksCounter" value="3" />
     <servers />
+  </component>
+  <component name="UnloadedModulesList">
+    <module name="AoC21Day01.buildSrc" />
+    <module name="AoC21Day01.buildSrc.main" />
+    <module name="AoC21Day01.buildSrc.test" />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
     <option name="TAB_STATES">
