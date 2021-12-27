@@ -19,54 +19,16 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="d87c35d2-9b33-454d-871b-f0e1f6725054" name="Changes" comment="solving problem 2 for day 1 in kotlin :)">
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/gradle_wrapper.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../../day 05/kotlin/.gitattributes" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../../day 05/kotlin/.gitignore" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../../day 05/kotlin/.idea/.gitignore" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../../day 05/kotlin/.idea/.name" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/../../day 05/kotlin/.idea/codeStyles/codeStyleConfig.xml" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/../../day 05/kotlin/.idea/compiler.xml" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/../../day 05/kotlin/.idea/gradle.xml" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/../../day 05/kotlin/.idea/inspectionProfiles/Project_Default.xml" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/../../day 05/kotlin/.idea/jarRepositories.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../../day 05/kotlin/.idea/misc.xml" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/../../day 05/kotlin/.idea/vcs.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../../day 05/kotlin/app/build.gradle.kts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../../day 05/kotlin/app/src/main/AOC21Day05.main1.iml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../../day 05/kotlin/app/src/main/kotlin/rb/com/aoc21/day05/app/App.kt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../../day 05/kotlin/app/src/main/kotlin/rb/com/aoc21/day05/app/Grid.kt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../../day 05/kotlin/app/src/main/kotlin/rb/com/aoc21/day05/app/HydrothermalGrid.kt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../../day 05/kotlin/app/src/main/kotlin/rb/com/aoc21/day05/app/MessageUtils.kt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../../day 05/kotlin/app/src/main/resources/log4j.properties" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../../day 05/kotlin/app/src/test/AOC21Day05.test1.iml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../../day 05/kotlin/app/src/test/kotlin/rb/com/aoc21/day05/app/GridTest.kt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../../day 05/kotlin/app/src/test/kotlin/rb/com/aoc21/day05/app/LineTest.kt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../../day 05/kotlin/app/src/test/kotlin/rb/com/aoc21/day05/app/MessageUtilsTest.kt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../../day 05/kotlin/app/src/test/resources/log4j.properties" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../../day 05/kotlin/build.gradle.kts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../../day 05/kotlin/buildSrc/build.gradle.kts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../../day 05/kotlin/buildSrc/src/main/kotlin/rb.com.aoc21.day05.kotlin-application-conventions.gradle.kts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../../day 05/kotlin/buildSrc/src/main/kotlin/rb.com.aoc21.day05.kotlin-common-conventions.gradle.kts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../../day 05/kotlin/buildSrc/src/main/kotlin/rb.com.aoc21.day05.kotlin-library-conventions.gradle.kts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../../day 05/kotlin/gradle/wrapper/gradle-wrapper.jar" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../../day 05/kotlin/gradle/wrapper/gradle-wrapper.properties" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../../day 05/kotlin/gradlew" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../../day 05/kotlin/gradlew.bat" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../../day 05/kotlin/list/build.gradle.kts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../../day 05/kotlin/list/src/main/AOC21Day05.main.iml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../../day 05/kotlin/list/src/main/kotlin/rb/com/aoc21/day05/list/LinkedList.kt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../../day 05/kotlin/list/src/test/AOC21Day05.test.iml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../../day 05/kotlin/list/src/test/kotlin/rb/com/aoc21/day05/list/LinkedListTest.kt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../../day 05/kotlin/settings.gradle.kts" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/../../day 05/kotlin/src/example.txt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../../day 05/kotlin/src/input.txt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../../day 05/kotlin/utilities/AOC21Day05.utilities.iml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../../day 05/kotlin/utilities/build.gradle.kts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../../day 05/kotlin/utilities/src/main/kotlin/rb/com/aoc21/day05/utilities/Fileutils.kt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../../day 05/kotlin/utilities/src/main/kotlin/rb/com/aoc21/day05/utilities/JoinUtils.kt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../../day 05/kotlin/utilities/src/main/kotlin/rb/com/aoc21/day05/utilities/SplitUtils.kt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../../day 05/kotlin/utilities/src/main/kotlin/rb/com/aoc21/day05/utilities/StringUtils.kt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../day 05/kotlin/app/src/main/kotlin/rb/com/aoc21/day05/app/Grid.kt" beforeDir="false" afterPath="$PROJECT_DIR$/../../day 05/kotlin/app/src/main/kotlin/rb/com/aoc21/day05/app/Grid.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../day 05/kotlin/app/src/test/kotlin/rb/com/aoc21/day05/app/LineTest.kt" beforeDir="false" afterPath="$PROJECT_DIR$/../../day 05/kotlin/app/src/test/kotlin/rb/com/aoc21/day05/app/LineTest.kt" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />

@@ -96,7 +96,7 @@ class Line(private val from: Point, private val to: Point) {
     }
 
     fun points(): List<Point> {
-        val points = sortedSetOf<Point>()
+        val points = arrayListOf<Point>()
         if (isSimple()) {
             if (isHorizontal()) {
                 val low = min(from.x, to.x)
@@ -114,10 +114,20 @@ class Line(private val from: Point, private val to: Point) {
                 }
             }
         } else {
-            (from.x..to.x).zip(from.y..to.y).map(Point::from).forEach(points::add)
+            val (lowPoint, highPoint) = when (from.x < to.x) {
+                true -> from to to
+                false -> to to from
+            }
+
+            val iterY = when (lowPoint.y < highPoint.y) {
+                true -> (lowPoint.y..highPoint.y)
+                false -> (highPoint.y..lowPoint.y).reversed()
+            }
+
+            (lowPoint.x..highPoint.x).zip(iterY).map(Point::from).forEach(points::add)
         }
 
-//        points.sor
+
         logger.debug { "Points on line $this: $points" }
         return points.toList()
     }

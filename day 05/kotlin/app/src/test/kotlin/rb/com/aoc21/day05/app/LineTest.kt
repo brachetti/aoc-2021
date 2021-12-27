@@ -77,6 +77,22 @@ internal class LineTest {
     }
 
     @Test
+    internal fun diagonalTestBackwards() {
+        val line = Line from "2,0 -> 0,2"
+
+        val points = line.points()
+
+        kotlin.test.assertEquals(
+            listOf(
+                Point from (0 to 2),
+                Point from (1 to 1),
+                Point from (2 to 0),
+            ),
+            points
+        )
+    }
+
+    @Test
     internal fun isHorizontal() {
         val line = line_horizontal
 
