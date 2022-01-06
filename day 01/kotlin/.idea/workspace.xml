@@ -20,6 +20,10 @@
   <component name="ChangeListManager">
     <list default="true" id="d87c35d2-9b33-454d-871b-f0e1f6725054" name="Changes" comment="solving problem 2 for day 1 in kotlin :)">
       <change afterPath="$PROJECT_DIR$/../../day 05/kotlin/.idea/vcs.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../day 10/kotlin/src/example.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../day 10/kotlin/src/input.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../day 10/kotlin/app/build.gradle.kts" beforeDir="false" afterPath="$PROJECT_DIR$/../../day 10/kotlin/app/build.gradle.kts" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />

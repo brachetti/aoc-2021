@@ -3,7 +3,7 @@
  */
 
 plugins {
-    id("com.rb.aoc21.day10.groovy-application-conventions")
+    id("com.rb.aoc21.day10.kotlin-application-conventions")
 }
 
 dependencies {
@@ -13,5 +13,5 @@ dependencies {
 
 application {
     // Define the main class for the application.
-    mainClass.set("com.rb.aoc21.day10.app.App")
+    mainClass.set("com.rb.aoc21.day10.app.AppKt")
 }

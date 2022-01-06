@@ -3,5 +3,5 @@
  */
 
 plugins {
-    id("com.rb.aoc21.day10.groovy-library-conventions")
+    id("com.rb.aoc21.day10.kotlin-library-conventions")
 }
